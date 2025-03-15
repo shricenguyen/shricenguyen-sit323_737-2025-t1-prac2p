@@ -65,6 +65,9 @@ app.get("/api/add", (req, res) => {
 
 //Endpoint to subtract two numbers
 app.get("/api/subtract", (req, res) => {
+  //get the values of num1 and num2 from the query
+  //and validate the values
+  //if the values are not valid, return error message
   const { num1, num2 } = req.query;
   const validation = verifyValues(num1, num2);
 
@@ -72,6 +75,8 @@ app.get("/api/subtract", (req, res) => {
     return res.status(400).json({ error: validation.error });
   }
 
+  //calculate the result
+  //and return the result in json format
   const result = validation.parsedNum1 - validation.parsedNum2;
   res.json({
     calculatingTask: "Subtraction",
@@ -83,6 +88,9 @@ app.get("/api/subtract", (req, res) => {
 
 //Endpoint to multiply two numbers
 app.get("/api/multiply", (req, res) => {
+  //get the values of num1 and num2 from the query
+  //and validate the values
+  //if the values are not valid, return error message
   const { num1, num2 } = req.query;
   const validation = verifyValues(num1, num2);
 
@@ -90,6 +98,8 @@ app.get("/api/multiply", (req, res) => {
     return res.status(400).json({ error: validation.error });
   }
 
+  //calculate the result
+  //and return the result in json format
   const result = validation.parsedNum1 * validation.parsedNum2;
   res.json({
     calculatingTask: "Multiplication",
@@ -101,6 +111,9 @@ app.get("/api/multiply", (req, res) => {
 
 //Endpoint to divide two numbers
 app.get("/api/divide", (req, res) => {
+  //get the values of num1 and num2 from the query
+  //and validate the values
+  //if the values are not valid, return error message
   const { num1, num2 } = req.query;
   const validation = verifyValues(num1, num2);
 
@@ -113,6 +126,8 @@ app.get("/api/divide", (req, res) => {
     return res.status(400).json({ error: "Cannot divide by zero" });
   }
 
+  //calculate the result
+  //and return the result in json format
   const result = validation.parsedNum1 / validation.parsedNum2;
   res.json({
     calculatingTask: "Division",
