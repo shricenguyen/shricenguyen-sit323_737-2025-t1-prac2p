@@ -1,7 +1,8 @@
-#Calculator Microservice
+# Calculator Microservice
+
 This is a simple Express.js-based microservice that provides basic and advanced mathematical operations through REST API endpoints.
 
-##Basic Operations
+## Basic Operations
 
 Addition (/api/add?num1=x&num2=y)
 
@@ -11,7 +12,7 @@ Multiplication (/api/multiply?num1=x&num2=y)
 
 Division (/api/divide?num1=x&num2=y)
 
-##Advanced Operations
+## Advanced Operations
 
 Exponentiation (/api/exponentiation?base=x&exponent=y)
 
@@ -19,12 +20,14 @@ Square Root (/api/squareRoot?num1=x)
 
 Modulo (/api/modulo?num1=x&num2=y)
 
-##Prerequisites
+## Prerequisites
+
 Node.js (v14 or later)
 
 npm (comes with Node.js)
 
-##Installation
+## Installation
+
 Clone the repository:
 
 ```
@@ -38,7 +41,8 @@ Install dependencies:
 npm install
 ```
 
-##Running the Server
+## Running the Server
+
 To start the server, run:
 
 ```
