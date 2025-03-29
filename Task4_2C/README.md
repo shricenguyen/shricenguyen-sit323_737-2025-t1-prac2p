@@ -31,14 +31,20 @@ npm (comes with Node.js)
 Clone the repository:
 
 ```
-git clone https://github.com/yourusername/calculator-microservice.git
-cd calculator-microservice
+git clone https://github.com/shricenguyen/shricenguyen-sit323_737-2025-t1-prac2p.git
+cd Task4_2C
+```
+
+Initialising Node.js project:
+
+```
+npm init -y
 ```
 
 Install dependencies:
 
 ```
-npm install
+npm install express
 ```
 
 ## Running the Server
@@ -46,7 +52,7 @@ npm install
 To start the server, run:
 
 ```
-node server.js
+node app.js
 ```
 
 To calculate any operation following these examples:
@@ -55,5 +61,4 @@ To calculate any operation following these examples:
 http://localhost:3000/api/modulo?num1=9&num2=3
 http://localhost:3000/api/add?num1=5&num2=3
 http://localhost:3000/api/squareRoot?num1=24
-
 ```
