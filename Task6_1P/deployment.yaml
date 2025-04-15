@@ -1,0 +1,26 @@
+# This is a Kubernetes Deployment configuration file for a Node.js application.
+# It defines a deployment with 3 replicas of the application, using the image "nodejs-app:1.0".
+
+apiVersion: apps/v1   #Kubernetes API version
+kind: Deployment      #Kubernetes object type
+metadata:
+  name: nodejs-app-deployment #Name of the deployment
+spec:
+  replicas: 3         #Number of replicas
+  selector:
+    matchLabels:
+      app: nodejs-app #Label selector to match the pods
+  template:
+    metadata:
+      labels:
+        app: nodejs-app #Labels for the pods created by the deployment
+    spec:
+      containers:
+      - name: nodejs-app          #Name of the container
+        image: nodejs-app:1.0     #Image to use for the container
+        imagePullPolicy: Never    #Policy for pulling the image
+                                  #Never means to use the local image only
+        ports:
+        - containerPort: 3000     #Port exposed by the container
+                                  #Matching the targetPort in the service        
+                

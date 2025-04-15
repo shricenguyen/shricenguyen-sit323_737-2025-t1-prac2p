@@ -1,0 +1,14 @@
+# This YAML file defines a Kubernetes service for a Node.js application.
+# It exposes the application on port 80 and forwards traffic to port 3000 on the container.
+
+apiVersion: v1      #Kubernetes API version
+kind: Service       #Kubernetes object type
+metadata:
+  name: nodejs-app-service     #Name of the service
+spec:
+  selector:
+    app: nodejs-app   #Selector to match the pods with the label "app: nodejs-app"
+  ports:
+  - port: 80          #Port exposed by the service
+    targetPort: 3000  #Port on the container to forward traffic to
+  type: NodePort  
