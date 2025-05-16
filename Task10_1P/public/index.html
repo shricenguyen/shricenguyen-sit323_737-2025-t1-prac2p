@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .calculator {
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9f7ef;
+            border-radius: 4px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Simple Calculator</h1>
+    <div class="calculator">
+        <div class="form-group">
+            <label for="num1">First Number:</label>
+            <input type="number" id="num1" name="num1" required>
+        </div>
+        <div class="form-group">
+            <label for="num2">Second Number:</label>
+            <input type="number" id="num2" name="num2" required>
+        </div>
+        <button onclick="calculate()">Add Numbers</button>
+
+        <div id="result" class="result">
+            <p><strong>Result:</strong> <span id="calculation-result"></span></p>
+        </div>
+    </div>
+
+    <script>
+        function calculate() {
+            // Get input values from the user
+            const num1 = document.getElementById('num1').value;
+            const num2 = document.getElementById('num2').value;
+
+            // Validate inputs to ensure they are numbers
+            if (!num1 || !num2) {
+                alert('Please enter both numbers');
+                return;
+            }
+
+            // Send calculation request to server
+            fetch('/calculate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ num1, num2 })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Check if the response contains an error 
+                    if (data.error) {
+                        alert(data.error);
+                        return;
+                    }
+                    // Display the result on the page
+                    document.getElementById('calculation-result').textContent =
+                        `${data.num1} + ${data.num2} = ${data.result}`;
+                    document.getElementById('result').style.display = 'block';
+                })
+                .catch(error => {
+                    // Handle any errors that occur during the fetch
+                    console.error('Error:', error);
+                    alert('An error occurred during calculation');
+                });
+        }
+    </script>
+</body>
+
+</html>

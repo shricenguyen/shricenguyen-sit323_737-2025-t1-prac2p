@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gke
+  labels:
+    app: gke
+spec:
+  replicas: 3 #The number of replicas of the application
+  selector:
+    matchLabels:
+      app: gke #Selecting the pods with the label app=gke
+  template:
+    metadata:
+      labels:
+        app: gke #The label for the pods
+    spec:
+      containers:
+        - name: gke
+          image: shrice/gke:multiarch #Retrieving the image shrice/gke:multiarch from Docker Hub
+          imagePullPolicy: Always #Forcing Kubernetes to always pull the image from the repository
+          ports:
+            - containerPort: 3000 #The port on which the application will run
+          resources:
+            requests:
+              cpu: 100m #The minimum amount of CPU required for the container
+              memory: 128Mi #The minimum amount of memory required for the container
+            limits:
+              cpu: 200m #The maximum amount of CPU that the container can use
+              memory: 256Mi #The maximum amount of memory that the container can use
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gke
+spec:
+  selector:
+    matchLabels:
+      app: gke #Selecting the pods with the label app=gke
+  ports:
+    - port: 80 #The port on which the service will be exposed externally
+      targetPort: 3000 #The port on which the service will forward traffic to the pods
+  type: LoadBalancer #This service will be exposed to the internet via a cloud provider's load balancer
